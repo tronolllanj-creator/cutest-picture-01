@@ -16,6 +16,8 @@ def main():
     dst_path = os.path.join(output_dir, "entry.png")
     
     shutil.copyfile(src_path, dst_path)
+    if os.path.getsize(dst_path) != os.path.getsize(src_path):
+        raise RuntimeError("copied entry.png size does not match the source")
     
     # Ensure byte-identical and deterministic copy by matching permissions and times if needed,
     # though shutil.copyfile just copies data. shutil.copy2 preserves metadata.
